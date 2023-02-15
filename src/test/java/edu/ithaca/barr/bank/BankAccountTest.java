@@ -26,7 +26,12 @@ class BankAccountTest {
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertFalse( BankAccount.isEmailValid(""));         // empty string
-
+        // valid email address - boundary case because it is the minimum number of accepted chars
+        assertTrue(BankAccount.isEmailValid( "a@b.com")); 
+        // empty string - equivalance case because it should not be an empty string  
+        assertFalse( BankAccount.isEmailValid("")); 
+        //all allowed characters - equivalance case, because it ensures letters, nums, and certain chars are allowed        
+        assertTrue(BankAccount.isEmailValid("aZ1_0.9-d@z.net")); 
         
     }
 
