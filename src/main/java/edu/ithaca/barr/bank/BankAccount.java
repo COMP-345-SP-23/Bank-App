@@ -44,9 +44,10 @@ public class BankAccount {
      * @return
      */
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if(!Character.isLetterOrDigit(email.charAt(email.indexOf("@")-1))){
             return false;
         }
+
         int IndexATT=0;
         String prefix = email.substring(0, IndexATT);
         for (int p = 0; p < prefix.length(); p++) {
@@ -55,10 +56,20 @@ public class BankAccount {
                 return false;
             }
         }
+        if (email.length()<=5) return false;
+
+        if (email.indexOf('@') == -1){
+           
+            return false;
+        }
+        
+        
+        else {
+            return true;
+
+        }
     
         
-            return true;
     
-
     }  
 }
