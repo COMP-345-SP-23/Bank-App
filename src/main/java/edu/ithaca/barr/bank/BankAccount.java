@@ -43,10 +43,12 @@ public class BankAccount {
         if(!Character.isLetterOrDigit(email.charAt(email.indexOf("@")-1))){
             return false;
         }
-        
+        if (email.length()<=5) return false;
+
         if (email.indexOf('@') == -1){
             return false;
         }
+        
         
         else {
             return true;
