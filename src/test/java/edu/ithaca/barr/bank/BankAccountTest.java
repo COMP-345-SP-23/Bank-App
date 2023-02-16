@@ -26,10 +26,16 @@ class BankAccountTest {
     void isEmailValidTest(){
 
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
+
         assertFalse( BankAccount.isEmailValid(""));   // empty string
     
         assertFalse(BankAccount.isEmailValid("abc#def"));//the only allowed characters are letters,digits,'.','-','_'
 
+
+
+        assertFalse( BankAccount.isEmailValid(""));         // empty string
+        assertFalse( BankAccount.isEmailValid("abc@"));
+        assertFalse( BankAccount.isEmailValid("abc"));
 
         // valid email address - boundary case because it is the minimum number of accepted chars
         assertTrue(BankAccount.isEmailValid( "a@b.com")); 
@@ -41,7 +47,11 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("m_@r.com")); 
         //ensures numbers and dashes are allowed in the domain, and last part is over two characters - both boundary case and equivalance case- checks the length and specific case
         assertTrue(BankAccount.isEmailValid("jeff@b1-z.cc"));
+
         //just to check
+
+
+        
 
         
     }

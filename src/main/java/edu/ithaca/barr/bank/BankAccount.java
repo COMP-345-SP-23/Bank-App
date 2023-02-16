@@ -62,8 +62,12 @@ public class BankAccount {
            
             return false;
         }
-        
-        
+
+        if (email.indexOf('.')== -1)
+        {
+            return false;
+        }
+
         else {
             return true;
 
