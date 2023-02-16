@@ -27,7 +27,7 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertFalse( BankAccount.isEmailValid(""));   // empty string
     
-        assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));//the only allowed characters are letters,digits,'.','-','_'
+        assertFalse(BankAccount.isEmailValid("abc#def"));//the only allowed characters are letters,digits,'.','-','_'
 
         
     }

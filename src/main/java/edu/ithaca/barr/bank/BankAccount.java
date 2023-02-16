@@ -39,14 +39,26 @@ public class BankAccount {
     }
 
 
+    /**
+     * @param email
+     * @return
+     */
     public static boolean isEmailValid(String email){
-        
         if (email.indexOf('@') == -1){
             return false;
         }
-        else {
-            return true;
+        int IndexATT=0;
+        String prefix = email.substring(0, IndexATT);
+        for (int p = 0; p < prefix.length(); p++) {
+            char pre = prefix.charAt(p);
+            if (!Character.isLetterOrDigit(pre) && pre != '-' && pre != '_' && pre != '.') {
+                return false;
+            }
         }
+    
+        
+            return true;
+    
 
-    }    
+    }  
 }
