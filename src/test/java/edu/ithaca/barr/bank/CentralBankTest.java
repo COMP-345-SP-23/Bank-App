@@ -1,7 +1,7 @@
 /*
 * ATM_teller interface
- * Methods : checkBalance,Deposit,seeTransaction,withdraw,transfer
- * Name : Simret Melak
+ * Methods : testSearchAccount(),testGetAccounts(),testAddAccounts(),testDeleteAccount()
+  * Name : Simret Melak
  * Date :  2/21/2023
  */
 
