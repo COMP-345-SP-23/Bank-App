@@ -1,8 +1,8 @@
 /*
-* ATM_teller interface
+* CentralBank Class
  * Methods : SearchAccount,GetAccounts,AddAccounts,DeleteAccount
  * Name : Simret Melak
- * Date :  2/21/2023
+ * Date : 2/21/2023
  */
 package edu.ithaca.barr.bank;
 
@@ -40,10 +40,11 @@ public class CentralBank {
     public void addAccounts(Account account){
         this.accounts.add(account);
     }
-    //@deleteAccount Removes an account from the list of accounts
-    public void deleteAccount(Account account){
+     //@deleteAccount Removes an account from the list of accounts after withdrawing all the money inside the account
+     public void deleteAccount(Account account){
         if(searchAccount(account.getAcctNum(),accounts).equals(account))
-            accounts.remove(account);
+        {   account.withdraw(account.checkBalance());
+            accounts.remove(account);}
         else
             System.out.println("The account does not exist");
     }
