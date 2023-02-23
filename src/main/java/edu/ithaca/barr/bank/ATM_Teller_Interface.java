@@ -25,7 +25,7 @@ public interface ATM_Teller_Interface {
      * returns an arraylist of transaction history
      * @return
      */
-    ArrayList<Double> getTransactionHistory();
+    public ArrayList<Double> seeTransaction(Account account);
 
     /**
      * 

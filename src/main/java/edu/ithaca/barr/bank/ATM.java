@@ -5,32 +5,33 @@
  * Date :  2/21/2023
  */
 
-package edu.ithaca.barr.bank;
+ package edu.ithaca.barr.bank;
 
-import java.util.ArrayList;
-
-public class ATM implements ATM_Teller_Interface{
-    public CentralBank bank;
-
-    public double checkBalance(Account account) {
-        return 0.0;
-    }
-    
-    public void deposit(Account account, double amount){
-        
-    }
+ import java.util.ArrayList;
  
-    public ArrayList<Double> seeTransaction(Account account){
-        return null;
-    }
-       
-    public void withdraw(Account account,double amount){
+ public class ATM implements ATM_Teller_Interface{
+     public CentralBank bank;
+ 
+     public double checkBalance(Account account) {
+         return account.checkBalance();
+     }
+     
+     public void deposit(Account account, double amount){
+         account.deposit(amount);
+     }
+  
+     public ArrayList<Double> seeTransaction(Account account){
+         return account.getTransactionHistory();
+     }
         
-    }
-
-    public void transfer(Account accountSender, Account accountReciever, double amount){
-       
-    }
+     public void withdraw(Account account,double amount){
+         account.withdraw(amount);
+     }
+ 
+     public void transfer(Account accountSender, Account accountReciever, double amount){
+         accountSender.transfer(accountReciever, amount);
+     }
+ 
 
     @Override
     public boolean checkCredentials(String credentials) {
