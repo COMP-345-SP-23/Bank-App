@@ -6,20 +6,20 @@ import java.util.ArrayList;
    Date: Feb 19, 2023
    */ 
 public class Account {
-    private int acct_num;
-    private double balance;
-    private Customer customer;
-    private ArrayList<Double> transaction_history;
+    protected int acctNum;
+    protected double balance;
+    protected Customer customer;
+    protected ArrayList<Double> transaction_history;
 
-    public Account(int acct_num,double balance,Customer customer){
-        this.acct_num = acct_num;
-        this.balance = balance;
-        this.customer = customer;
-        this.transaction_history = new ArrayList<>();
+    public Account(int acctNumIn,double balanceln,Customer customerln){
+        acctNum = acctNumIn;
+        balance = balanceln;
+        customer = customerln;
+        transaction_history = new ArrayList<>();
     }
 
     public int getAcctNum(){
-        return acct_num;
+        return acctNum;
     }
     public Customer getCustomer(){
         return customer;
