@@ -28,7 +28,7 @@ public class Account {
         return balance;
     }
 
-    public static boolean isAmountValid(double amount){
+    public  boolean isAmountValid(double amount){
         //String num = Double.toString(amount);
         
         if( amount <0){
