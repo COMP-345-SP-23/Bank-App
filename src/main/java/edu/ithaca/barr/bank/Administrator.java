@@ -1,26 +1,40 @@
 package edu.ithaca.barr.bank;
+/**
+ * Class Name: Administrator
+ * Methods: checKOverallBalance, freezeAcc, unfreezeAcc, checkSuspiciousness
+ * Name: Vanessa Mpofu
+ * Date: 23 Feb 2023
+ */
 
 public class Administrator {
+    //private CentralBank centralBankSystem1 = new CentralBank();
+    
+
+    public Administrator(){
+        //isFrozen = false;
+    }
     
     public double checkOverallBalance(){
-        // TODO Auto-generated method stub
-        return -1.0;
+        return checkOverallBalance();
+    
+    }    
+
+
+    public void freezeAccount(){
+        freezeAccount();
     }
 
-    public boolean freezeAccount(int accNum){
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    public boolean unfreezeAccount(int accNum){
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    public void checkSuspiciousNess(int accNum){
-        // TODO Auto-generated method stub
+    public void unfreezeAccount(){
+        unfreezeAccount();
 
     }
 
+    public boolean isFrozen() {
+        return isFrozen();
+    }
+
+    public void checkSuspiciousNess(int acc_num){
+        checkSuspiciousNess(acc_num);
+    }
 
 }
