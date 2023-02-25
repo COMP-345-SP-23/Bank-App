@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Class Name: SavingsAccount
- * Methods: inherits methods from account
+ * Methods: inherits methods from account, interestEarned method, maxWithdrawal method
  * Name: Vanessa Mpofu
  * Date: 23 Feb 2023
  */
@@ -72,5 +72,26 @@ public class SavingsAccount extends Account{
         return balance;
     }
 
+    public int getTransactionCount() {
+        return transactionCount;
+    }
+
+    public void checkSuspiciousNess(int acc_num) {
+        
+    }
+
+    public void freezeAccount(){
+        freezeAccount();
+    }
+
+    public void unfreezeAccount(){
+       unfreezeAccount();
+
+    }
+
+    public boolean isFrozen() {
+        return isFrozen();
+    }
+    
 
 }

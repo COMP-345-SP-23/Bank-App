@@ -47,4 +47,26 @@ public class CheckingsAccount extends Account {
         return balance;
     }
     
+
+    public int getTransactionCount() {
+        return transactionCount;
+    }
+
+    public void checkSuspiciousNess(int acc_num) {
+        
+    }
+
+    public void freezeAccount(){
+        freezeAccount();
+    }
+
+    public void unfreezeAccount(){
+       unfreezeAccount();
+
+    }
+
+    public boolean isFrozen() {
+        return isFrozen();
+    }
+    
 }
