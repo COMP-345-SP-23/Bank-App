@@ -15,44 +15,36 @@ public class CheckingsAccount extends Account {
         // tell Nardos to change the Account attributes to protected
     }
 
-    public static boolean isAmountValid(double amount){
-        //TODO Auto-generated message 
-        return false;
+    public  boolean isAmountValid(double amount){
+        return super.isAmountValid(amount);
     }
 
     public void deposit(double amount){
-        //TODO Auto-generated message 
-
+        super.deposit(amount);
     }
 
     public void withdraw(double amount){
-        //TODO Auto-generated message 
-
+        super.withdraw(amount);
     }
 
     public ArrayList<Double> getTransactionHistory(){
-        //TODO Auto-generated message 
-        return null;
-
+        return super.getTransactionHistory();
+        
     }
 
     public void transfer(Account acc2, double amount){
-        //TODO Auto-generated message 
-
+        super.transfer(acc2, amount);
     }
 
     public int getAcctNum(){
-        //TODO Auto-generated message 
-        return -1;
+        return acctNum;
     }
     public Customer getCustomer(){
-        //TODO Auto-generated message 
-        return null;
+        return customer;
 
     }
     public double checkBalance() {
-        //TODO Auto-generated message 
-        return -1.0;
+        return balance;
     }
     
 }
