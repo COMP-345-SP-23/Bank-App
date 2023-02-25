@@ -9,76 +9,68 @@ import java.util.ArrayList;
  * Date: 23 Feb 2023
  */
 public class SavingsAccount extends Account{
-    private double maxAmount;
-    private double interestRate;
-
+    
     public SavingsAccount(int acctNumIn,double balanceln,Customer customerln){
         super(acctNumIn, balanceln, customerln);
-        maxAmount = 0.0;
-        interestRate =0.0;
-    }
-
-    public  boolean isAmountValid(double amount){
-        // TODO auto-generated message 
-        return false;
-    }
-
-
-    public void deposit(double amount){
-        // TODO auto-generated message
-
-    }
-
-
-    public void withdraw(double amount){
-        // TODO auto-generated message 
-
-    }
-
-
-    public ArrayList<Double> getTransactionHistory(){
-        // TODO auto-generated message 
-        return null;
-
         
     }
 
+    public  boolean isAmountValid(double amount){
+        return super.isAmountValid(amount);
+    }
+
+    public void deposit(double amount){
+        super.deposit(amount);
+    }
+
+    public void withdraw(double amount){
+        super.withdraw(amount);
+    }
+
+    public ArrayList<Double> getTransactionHistory(){
+        return super.getTransactionHistory();
+        
+    }
 
     public void transfer(Account acc2, double amount){
-        // TODO auto-generated message 
-
+        super.transfer(acc2, amount);
     }
-    
 
     public void maxWithdrawal(double amount, double maxAmount){
-        // TODO auto-generated message 
-      
+        if( amount < maxAmount){
+            withdraw(amount);
+        }
+
+        else{
+            throw new IllegalArgumentException("Cannot make a withdrawal that exceeds the maximum withdrawal amount");
+        }
     }
 
 
-    public double interestEarned( double interestRate){
-        // TODO auto-generated message 
-        return -1.0;
+    public double interestEarned( SavingsAccount account, double interestRate){
+        double balanceAfterInterest = 0.0;
+        if (account != null && account.checkBalance() != 0.0){          
+            balanceAfterInterest = account.checkBalance() + account.checkBalance() * interestRate;    
+        }
+        return balanceAfterInterest;
       
     }
 
 
     public int getAcctNum(){
-        // TODO auto-generated message 
-        return -1;
+        return acctNum;
     }
 
 
     public Customer getCustomer(){
-        // TODO auto-generated message 
-        return null;
+        return customer;
 
     }
 
 
     public double checkBalance() {
-        // TODO auto-generated message
-        return -1.0; 
+        return balance;
     }
-    
+
+
 }

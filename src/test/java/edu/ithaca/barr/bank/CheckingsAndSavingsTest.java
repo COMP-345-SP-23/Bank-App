@@ -64,9 +64,10 @@ public class CheckingsAndSavingsTest {
     void depositAndInterestTest(){
         Customer customer = new Customer("John", "johndoe@example.com");
         SavingsAccount account = new SavingsAccount(123456, 1000.0, customer);
-        account.deposit(500.50);
-        assertEquals(1500.50, account.checkBalance());
-        assertEquals(1575.52, account.interestEarned( 0.05));
+        account.deposit(500.0);
+        assertEquals(1500.0, account.checkBalance());
+        account.interestEarned(account, 0.05);
+        assertEquals(1575.0, account.interestEarned(account, 0.05));
     }
 
 
