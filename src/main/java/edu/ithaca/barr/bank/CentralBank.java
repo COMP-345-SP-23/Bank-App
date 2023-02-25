@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CentralBank {
 
-    private ArrayList<Account> accounts;
+    ArrayList<Account> accounts;
 
     //@CentralBank contains all the accounts in the Bank
     public CentralBank(){
@@ -47,4 +47,27 @@ public class CentralBank {
         else
             System.out.println("The account does not exist");
     }
+
+    // Vanessa added this method
+    public Double checkOverallBalance() {
+        double overallBalance = 0.0;
+        for (Account account : accounts) {
+            overallBalance += account.checkBalance();
+        }
+        return overallBalance;
+    }
+
+    // Vanessa added this method
+    public void checkSuspiciousNess(int acc_num){
+        Account account = accounts.get(acc_num);
+        if(account  != null && account.getTransactionCount() > 5 ){
+            System.out.println("Suspicious activity detected");
+            
+        }
+
+    }
+
+    
+
+    
 }
