@@ -1,20 +1,24 @@
 package edu.ithaca.barr.bank;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 /**
  * Class Name:CheckingsAndSavingsTest
- * Methods: 
+ * Methods: test methods on both Savings and Checkings accounts
  * Name: Vanessa Mpofu
  * Date: 23 Feb 2023
  */
 public class CheckingsAndSavingsTest {
     
     @Test
-    public void testDeposit() {
+    /**
+     * deposit test on a checkings account
+     */
+    void testDeposit() {
         Customer customer = new Customer("John", "johndoe@example.com");
         CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
         account.deposit(500.0);
@@ -23,8 +27,11 @@ public class CheckingsAndSavingsTest {
         assertTrue(account.getTransactionHistory().contains(500.0));
     }
     
+    /**
+     * withdraw test on checkings account 
+     */
     @Test
-    public void testWithdraw() {
+    void testWithdraw() {
         Customer customer = new Customer("John", "johndoe@example.com");
         CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
         account.withdraw(500.0);
@@ -33,8 +40,11 @@ public class CheckingsAndSavingsTest {
         assertTrue(account.getTransactionHistory().contains(-500.0));
     }
     
+    /**
+     * transfer test on checkings account
+     */
     @Test
-    public void testTransfer() {
+    void testTransfer() {
         Customer customer = new Customer("John", "johndoe@example.com");
         CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
         CheckingsAccount account2 = new CheckingsAccount(654321, 500.0, customer);
@@ -45,6 +55,30 @@ public class CheckingsAndSavingsTest {
         assertEquals(1000.0, account2.checkBalance(), 0.01);
         assertEquals(1, account2.getTransactionHistory().size());
         assertTrue(account2.getTransactionHistory().contains(500.0));
+    }
+
+    /**
+     * deposits and calculate interest on savings account
+     */
+    @Test
+    void depositAndInterestTest(){
+        Customer customer = new Customer("John", "johndoe@example.com");
+        SavingsAccount account = new SavingsAccount(123456, 1000.0, customer);
+        account.deposit(500.50);
+        assertEquals(1500.50, account.checkBalance());
+        assertEquals(1575.52, account.interestEarned( 0.05));
+    }
+
+
+    /**
+     * test for maximum withdrawal amount on savings account
+     */
+    @Test
+    void maxWithdrawalTest(){
+        Customer customer = new Customer("John", "johndoe@example.com");
+        SavingsAccount account = new SavingsAccount(123456, 10000.0, customer);
+        assertThrows(IllegalArgumentException.class, ()-> account.maxWithdrawal(5500.00, 5000.0));
+
     }
     
     
