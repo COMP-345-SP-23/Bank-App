@@ -11,12 +11,18 @@
  
  public class ATM implements ATM_Teller_Interface{
      public CentralBank bank;
- 
+     private ArrayList<Account> suspicious_acc = new ArrayList<>();
      public double checkBalance(Account account) {
          return account.checkBalance();
      }
+
+     public ArrayList<Account> getSuspiciousAccounts(){
+        return suspicious_acc;
+    }
      
      public void deposit(Account account, double amount){
+        if(amount > 5000)
+            suspicious_acc.add(account);
          account.deposit(amount);
      }
   
@@ -25,6 +31,8 @@
      }
         
      public void withdraw(Account account,double amount){
+        if(amount > 5000)
+            suspicious_acc.add(account);
          account.withdraw(amount);
      }
  
