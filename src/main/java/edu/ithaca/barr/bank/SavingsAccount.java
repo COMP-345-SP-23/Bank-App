@@ -8,11 +8,11 @@ import java.util.ArrayList;
  * Name: Vanessa Mpofu
  * Date: 23 Feb 2023
  */
+
 public class SavingsAccount extends Account{
-    
-    public SavingsAccount(int acctNumIn,double balanceln,Customer customerln){
-        super(acctNumIn, balanceln, customerln);
-        
+    public SavingsAccount(int acct_num, double balance, Customer customer, String password) {
+        super(acct_num, balance, customer, password);
+     
     }
 
     public  boolean isAmountValid(double amount){
@@ -58,7 +58,7 @@ public class SavingsAccount extends Account{
 
 
     public int getAcctNum(){
-        return acctNum;
+        return acct_num;
     }
 
 
@@ -73,7 +73,7 @@ public class SavingsAccount extends Account{
     }
 
     public int getTransactionCount() {
-        return transactionCount;
+        return getTransactionCount();
     }
 
     public void checkSuspiciousNess(int acc_num) {
