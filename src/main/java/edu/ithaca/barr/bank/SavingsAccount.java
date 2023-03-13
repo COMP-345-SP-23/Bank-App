@@ -8,11 +8,8 @@ import java.util.ArrayList;
  * Name: Vanessa Mpofu
  * Date: 23 Feb 2023
  */
+
 public class SavingsAccount extends Account{
-   
-
-    
-
     public SavingsAccount(int acct_num, double balance, Customer customer, String password) {
         super(acct_num, balance, customer, password);
      
