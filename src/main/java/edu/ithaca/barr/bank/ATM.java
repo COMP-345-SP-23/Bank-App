@@ -1,3 +1,5 @@
+package edu.ithaca.barr.bank;
+
 /*
 * ATM
  * Methods : checkBalance,deposit,seeTransaction,withdraw,transfer
@@ -5,50 +7,128 @@
  * Date :  2/21/2023
  */
 
- package edu.ithaca.barr.bank;
+
 
  import java.util.ArrayList;
  
- public class ATM implements ATM_Teller_Interface{
-     public CentralBank bank;
- //@checkBalance returns the balance of the account passed to it
-     public double checkBalance(Account account) {
-         return account.checkBalance();
-     }
+ public class ATM implements ATM_teller{
+
+     public  CentralBank bank;
+     public Account current_account;
 
 
- //@deposit deposits the amount of money passed in the account that is passed    
-     public void deposit(Account account, double amount){
-        if(amount > 5000)
-            suspicious_acc.add(account);
-         account.deposit(amount);
-     }
+     public ATM(CentralBank bank) {
+        this.bank = bank;
+    }
+  
 
 
-  //@seeTransaction returns the transaction history of the account passed
-     public ArrayList<Double> seeTransaction(Account account){
-         return account.getTransactionHistory();
-     }
-        
-
-  //@withdraw withdraws the amount of money passed from the account passed to it
-     public void withdraw(Account account,double amount){
-        if(amount > 5000)
-            suspicious_acc.add(account);
-         account.withdraw(amount);
-     }
  
- //@transfer transfers the amount of money passed form one account to another
-     public void transfer(Account accountSender, Account accountReciever, double amount){
-         accountSender.transfer(accountReciever, amount);
-     }
- 
+    @Override
+    public double checkSavingsBalance(SavingsAccount account) {
+        return account.checkBalance();
+    }
 
     @Override
-    public boolean checkCredentials(String credentials) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkCredentials'");
+    public double checkCheckingsBalance(CheckingsAccount account) {
+        return account.checkBalance();
     }
-}
+
+    @Override
+    public void depositToSavings(SavingsAccount account, double amount) {
+    //Check if the account is frozen
+    if(account.getFreeze()==true)
+    {
+       System.out.println("You can not deposit. This account is frozen");
+       return;
+    }
+      //mark as suspicious account if more than 5000 is deposited
+      if(amount > 5000)
+      account.setSuspicious(true);
+  account.deposit(amount);
+  }
+
+
+  @Override
+  public void depositToCheckings(CheckingsAccount account, double amount) {
+      //Check if the account is frozen
+      if(account.getFreeze()==true)
+           {
+              System.out.println("You can not deposit. This account is frozen");
+              return;
+           }
+
+      //mark as suspicious account if more than 5000 is deposited
+      if(amount > 5000)
+          account.setSuspicious(true);
+      account.deposit(amount);
+  }
+
+    @Override
+    public ArrayList<Double> seeSavingsTransaction(SavingsAccount account) {
+        return account.getTransactionHistory();
+    }
+
+    @Override
+    public ArrayList<Double> seeCheckingsTransaction(CheckingsAccount account) {
+        return account.getTransactionHistory();
+    }
+
+    @Override
+    public void withdrawFromSavings(SavingsAccount account, double amount) {
+
+        if(account.getFreeze()==true)
+             {
+                System.out.println("You can not deposit. This account is frozen");
+                return;
+             }
+        if(amount > 5000)
+            account.setSuspicious(true);
+    account.withdraw(amount);
+    }
+
+     @Override
+    public void withdrawFromCheckings(CheckingsAccount account, double amount) {
+        if(account.getFreeze()==true)
+             {
+                System.out.println("You can not deposit. This account is frozen");
+                return;
+             }
+        if(amount > 5000)
+            account.setSuspicious(true);
+
+    account.withdraw(amount);
+    }
+
+    @Override
+    public void transferChecking(CheckingsAccount accountSender, CheckingsAccount accountReciever, double amount) {
+        withdrawFromCheckings(accountSender, amount);
+        accountReciever.deposit(amount);
+    }
+
+    @Override
+    public boolean authenticateUser(int accountNumber, String password) {
+        for (Account account : bank.getCheckingAccounts()) {
+            if (accountNumber == account.getAcctNum() && account.checkPassword(password)) {
+                current_account = account;
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public void transferSavingtoChecking(SavingsAccount accountSender, CheckingsAccount accountReciever,
+            double amount) {
+        if(accountSender.getCustomer().equals(accountReciever.getCustomer()))
+        {
+            withdrawFromSavings(accountSender, amount);
+            accountReciever.deposit(amount);
+        }
+        else
+            throw new IllegalArgumentException("You can not transfer money from your savings account unless it is to your checkings Account");
+                
+    }
+    
+ }
 
 
