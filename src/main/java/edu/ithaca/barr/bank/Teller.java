@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 public class Teller implements ATM_teller{
     public CentralBank bank;
-   //Create Account for Customer
-    public void createAccount(Customer customer, int acc_num){
-        Account acc = new Account(acc_num,0.0,customer);
+    private ArrayList<Account> suspicious_acc = new ArrayList<>();
+    public void createSavingAccount(Customer customer, int acc_num){
         bank.addAccounts(acc); 
     }
 //Delete Account 
@@ -39,3 +38,4 @@ public class Teller implements ATM_teller{
         accountSender.transfer(accountReciever, amount);
     }
 }
+

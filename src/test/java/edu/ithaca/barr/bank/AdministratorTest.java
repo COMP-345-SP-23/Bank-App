@@ -5,71 +5,95 @@ package edu.ithaca.barr.bank;
  * Name: Vanessa Mpofu
  * Date: 23 Feb 2023
  */
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Edited
+ * Class Name: AdministratorTest
+ * Methods: getOverallBalance,freezeAccount,getSuspiciousAccount
+ * Name: Simret Melak
+ * Date: 3/13/2023
+ */
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class AdministratorTest {
-    
+class AdministratorTest {
+    CentralBank bank = new CentralBank();
+    Teller teller = new Teller(bank);
+    Administrator admin = new Administrator(bank);
     @Test
-    void overallBalanceTest(){
-        CentralBank centralBankSystem = new CentralBank();
-        Customer customer = new Customer("John", "johndoe@example.com");
-        Customer customer1 = new Customer("Jack", "jackdoe@example.com");
-        Customer customer2 = new Customer("James ", "james@example.com");
-        Customer customer3 = new Customer("Jake", "jdoe@example.com");
-        Account account  = new Account(654321, 5000.0, customer);
-        Account account1 = new Account(651432, 1500.0, customer1);
-        Account account2  = new Account(321654, 5500.0, customer2);
-        Account account3 = new Account(432651, 50000.0, customer3);
-        centralBankSystem.addAccounts(account);
-        centralBankSystem.addAccounts(account1);
-        centralBankSystem.addAccounts(account2);
-        centralBankSystem.addAccounts(account3);
-        assertEquals(62000.0, centralBankSystem.checkOverallBalance());
-        // not yet sure whether checkOverallBalance should have a parameter
-
-    }
+void testGetOverallBalance() {
+    // Create a customer and add a savings and checking account to the bank
+    Customer customer = new Customer("Charlie","c@gmail.com");
+    bank.addSavingAccounts(new SavingsAccount(1, 100.0, customer, "password"));
+    CheckingsAccount account = new CheckingsAccount(1, 100.0, customer, "password");
+    bank.addCheckingAccounts(account);
     
+    // Test that the overall balance is correctly calculated
+    assertEquals(200.0, admin.getOverallBalance(), 0.01);
+}
 
-    @Test
-    /**
-     * create an account object
-     * check if the account is frozen or unfrozen upon creation 
-     * it should show false because we cannot create a frozen account
-     */
-    void frozenUnfrozenTest(){
-        Customer customer = new Customer("John", "johndoe@example.com");
-        Account account  = new Account(654321, 500.0, customer);
-        assertFalse(account.isFrozen());
-        account.freezeAccount();
-        assertTrue(account.isFrozen());
-        account.unfreezeAccount();
-        assertFalse(account.isFrozen());
-     
-    }
+// Test the freezeCheckingAccount and unfreezeCheckingAccount methods of the Administrator class
+@Test
+void testFreezeCheckingAccount() {
+    // Create two customers and checking accounts, and add them to the bank
+    Customer customer = new Customer("Charlie","c@gmail.com");
+    Customer customer1 = new Customer("at","c@gmail.com");
+    CheckingsAccount acc1 = new CheckingsAccount(1, 100.0, customer, "password");
+    CheckingsAccount acc2 = new CheckingsAccount(2, 100.0, customer1, "password");
+    bank.addCheckingAccounts(acc1);
+    bank.addCheckingAccounts(acc2);
+    
+    // Test that a frozen account throws an exception when a transaction is attempted
+    admin.freezeCheckingAccount(acc1.getAcctNum());
+    assertThrows(IllegalArgumentException.class, () -> {
+        teller.depositToCheckings(acc1,200);
+        throw new IllegalArgumentException("The account is frozen. Can not make any transaction");
+    });
+    
+    // Test that a thawed account can be used for a transaction
+    admin.unfreezeCheckingAccount(acc1.getAcctNum());
+    teller.depositToCheckings(acc1,200);
+    assertEquals(300, acc1.checkBalance());  
+}
 
-    @Test 
-    void checkSuspiciousTest(){
-        CentralBank centralBank = new CentralBank();
-        Customer customer = new Customer("John", "johndoe@example.com");
-        Customer customer2 = new Customer("James ", "james@example.com");
-        Account account  = new Account(654321, 500.0, customer);
-        Account account2 = new Account(674831, 500.0, customer2);
+// Test the freezeSavingAccount and unfreezeSavingAccount methods of the Administrator class
+@Test
+void testFreezeSavingAccount() {
+    // Create two customers and savings accounts, and add them to the bank
+    Customer customer = new Customer("Charlie","c@gmail.com");
+    Customer customer1 = new Customer("at","c@gmail.com");
+    SavingsAccount acc1 = new SavingsAccount(1, 100.0, customer, "password");
+    SavingsAccount acc2 = new SavingsAccount(2, 100.0, customer1, "password");
+    bank.addSavingAccounts(acc1);
+    bank.addSavingAccounts(acc2);
+    
+    // Test that a frozen account throws an exception when a transaction is attempted
+    admin.freezeSavingAccount(acc1.getAcctNum());
+    assertThrows(IllegalArgumentException.class, () -> {
+        teller.depositToSavings(acc1,200);
+        throw new IllegalArgumentException("The account is frozen. Can not make any transaction");
+    });
+    
+    // Test that a thawed account can be used for a transaction
+    admin.unfreezeSavingAccount(acc1.getAcctNum());
+    teller.depositToSavings(acc1,200);
+    assertEquals(300, acc1.checkBalance());
+}
+@Test
+void testgetSuspiciousAccounts(){
+Administrator admin = new Administrator(bank);
+Customer customer = new Customer("Charlie","c@gmail.com");
+Customer customer1 = new Customer("at","c@gmail.com");
 
-        centralBank.addAccounts(account);
-        centralBank.addAccounts(account2);
+// create two saving accounts
+teller.createSavingAccount(customer1,"Nardos124()");
+teller.createSavingAccount(customer,"Nardos124()");
 
-        centralBank.accounts.get(0).deposit(500.00);
-        centralBank.accounts.get(0).deposit(500.00);
-        centralBank.accounts.get(0).withdraw(200.00);
-        centralBank.accounts.get(0).deposit(500.00);
-        centralBank.accounts.get(0).withdraw(100.00);
-        centralBank.accounts.get(0).deposit(500.00);
-        centralBank.accounts.get(0).checkSuspiciousNess(654321);
- // should printout a message reporting suspicious activity
+// deposit a large amount to the first account
+teller.depositToSavings(bank.getSavingAccounts().get(0), 8000);
+teller.depositToSavings(bank.getSavingAccounts().get(1), 800);
 
-    }
+// check if the first account is returned by the getSuspiciousSavings() method
+assertEquals(bank.getSavingAccounts().get(0),admin.getSuspiciousSavings().get(0));
+}
 }

@@ -1,5 +1,6 @@
 package edu.ithaca.barr.bank;
 import java.util.ArrayList;
+
 /* Class name: Account
    Methods: Deposit,Withdraw,Transfer,getAccNum,getCustomer,checkBalance,getTransactionHistory
    Name: Nardos Mamo
@@ -77,6 +78,7 @@ public class Account {
         balance -= amount;
         transaction_history.add(-amount);
     }
+
 
     public ArrayList<Double> getTransactionHistory() {
         return transaction_history;
