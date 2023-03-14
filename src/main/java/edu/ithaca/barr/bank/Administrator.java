@@ -1,40 +1,35 @@
 package edu.ithaca.barr.bank;
-/**
- * Class Name: Administrator
- * Methods: checKOverallBalance, freezeAcc, unfreezeAcc, checkSuspiciousness
- * Name: Vanessa Mpofu
- * Date: 23 Feb 2023
- */
+import java.util.ArrayList;
 
 public class Administrator {
-    //private CentralBank centralBankSystem1 = new CentralBank();
-    
+    public CentralBank bank;
+    public Teller teller;
+    public ATM atm;
 
-    public Administrator(){
-        //isFrozen = false;
+    private ArrayList<Account> suspicious_acc = new ArrayList<>();
+
+    public ArrayList<Account> getSuspiciousAccounts(){
+        suspicious_acc.addAll(teller.getSuspiciousAccounts());
+        suspicious_acc.addAll(atm.getSuspiciousAccounts());
+        return suspicious_acc;
     }
-    
     public double checkOverallBalance(){
-        return checkOverallBalance();
-    
-    }    
-
-
-    public void freezeAccount(){
-        freezeAccount();
+        // TODO Auto-generated method stub
+        return -1.0;
     }
 
-    public void unfreezeAccount(){
-        unfreezeAccount();
-
+    public boolean freezeAccount(int accNum){
+        // TODO Auto-generated method stub
+        return false;
     }
 
-    public boolean isFrozen() {
-        return isFrozen();
+    public boolean unfreezeAccount(int accNum){
+        // TODO Auto-generated method stub
+        return false;
     }
 
-    public void checkSuspiciousNess(int acc_num){
-        checkSuspiciousNess(acc_num);
-    }
+ 
+
 
 }
+

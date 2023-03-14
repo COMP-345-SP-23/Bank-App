@@ -1,77 +1,99 @@
+
+
 /*
 * ATM_teller interface
- * Methods : testSearchAccount(),testGetAccounts(),testAddAccounts(),testDeleteAccount()
+ * Methods : testSearchAccount(),testGetAccounts(),testAddAccounts()
   * Name : Simret Melak
- * Date :  2/21/2023
+ * Date :  3/13/2023
  */
 
-package edu.ithaca.barr.bank;
+ package edu.ithaca.barr.bank;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+ import org.junit.jupiter.api.Test;
+ import static org.junit.jupiter.api.Assertions.*;
+ 
+ public class CentralBankTest {
+ 
+     // This test checks if the searchSavingAccount method returns the correct savings account for a given account ID.
+     @Test
+     public void testSearchSavingAccount() {
+         CentralBank bank = new CentralBank();
+         Customer customer = new Customer("Nardos","naninut@gmail.com");
+         SavingsAccount savingsAccount = new SavingsAccount(1,100,customer,"Simret1023###");
+         bank.addSavingAccounts(savingsAccount);
+         SavingsAccount account = bank.searchSavingAccount(1);
+         assertEquals(savingsAccount, account);
+     }
+ 
+     // This test checks if the searchCheckingAccount method returns the correct checking account for a given account ID.
+     @Test
+     public void testSearchCheckingAccount() {
+         CentralBank bank = new CentralBank();
+         Customer customer = new Customer("Nardos","naninut@gmail.com");
+         CheckingsAccount checkingsAccount = new CheckingsAccount(1,100,customer,"Simret1023###");
+         bank.addCheckingAccounts(checkingsAccount);
+         CheckingsAccount account = bank.searchCheckingAccount(1);
+         assertEquals(checkingsAccount, account);
+     }
+ 
+     // This test checks if the getSavingAccounts method returns all the savings accounts in the bank, and if it correctly identifies a savings account that has been added.
+     @Test
+     public void testGetSavingAccounts() {
+         CentralBank bank = new CentralBank();
+         Customer customer = new Customer("Nardos","naninut@gmail.com");
+         SavingsAccount savingsAccount = new SavingsAccount(1,100,customer,"Simret1023###");
+         bank.addSavingAccounts(savingsAccount);
+         assertEquals(1, bank.getSavingAccounts().size());
+         assertTrue(bank.getSavingAccounts().contains(savingsAccount));
+     }
+ 
+     // This test checks if the getCheckingAccounts method returns all the checking accounts in the bank, and if it correctly identifies a checking account that has been added.
+     @Test
+     public void testGetCheckingAccounts() {
+         CentralBank bank = new CentralBank();
+         Customer customer = new Customer("Nardos","naninut@gmail.com");
+         CheckingsAccount checkingsAccount = new CheckingsAccount(1,100,customer,"Simret1023###");
+         bank.addCheckingAccounts(checkingsAccount);
+         assertEquals(1, bank.getCheckingAccounts().size());
+         assertTrue(bank.getCheckingAccounts().contains(checkingsAccount));
+     }
+ 
+     // This test checks if the addSavingAccounts method correctly adds a new savings account to the bank.
+     @Test
+     public void testAddSavingAccounts() {
+         CentralBank bank = new CentralBank();
+         Customer customer = new Customer("Nardos","naninut@gmail.com");
+         SavingsAccount savingsAccount = new SavingsAccount(1,100,customer,"Simret1023###");
+         bank.addSavingAccounts(savingsAccount);
+         Customer customer1 = new Customer("Simret","nt@gmail.com");
+         SavingsAccount newAccount = new SavingsAccount(1,100,customer,"Simret1023###");
+         bank.addSavingAccounts(newAccount);
+         assertTrue(bank.getSavingAccounts().contains(newAccount));
+     }
 
-
-public class CentralBankTest {
-
-    private CentralBank centralBank;
-    private Account account1;
-    private Account account2;
-    private Account account3;
-
-
+     // This test checks if the addCheckingAccounts method correctly adds a new savings account to the bank.
     @Test
-    public void testSearchAccount() {
-        centralBank = new CentralBank();
-        account1 = new Account(1, 100.0, new Customer("Alice","a@gmail.com"));
-        account2 = new Account(2, 50.0, new Customer("Bob","b@gmail.com"));
-        centralBank.addAccounts(account1);
-        centralBank.addAccounts(account2);
-        Account result1 = CentralBank.searchAccount(1, centralBank.getAccounts());
-        Account result2 = CentralBank.searchAccount(2, centralBank.getAccounts());
-        Account result3 = CentralBank.searchAccount(3, centralBank.getAccounts());
-
-        assertEquals(account1, result1);
-        assertEquals(account2, result2);
-        assertNull(result3);
+    public void testAddCheckingAccounts() {
+        CentralBank bank = new CentralBank();
+        Customer customer = new Customer("Nardos","naninut@gmail.com");
+      
+        CheckingsAccount checkingsAccount = new CheckingsAccount(1,100,customer,"Simret1023###");
+        bank.addCheckingAccounts(checkingsAccount);
+        Customer customer1 = new Customer("Simret","n@gmail.com");
+        CheckingsAccount newAccount = new CheckingsAccount(1,100,customer,"Simret1023###");
+        bank.addCheckingAccounts(newAccount);
+        assertTrue(bank.getCheckingAccounts().contains(newAccount));
     }
 
+    // this test checks the overall balance of the bank
     @Test
-    public void testGetAccounts() {
-        centralBank = new CentralBank();
-        account1 = new Account(1, 100.0, new Customer("Alice","a@gmail.com"));
-        account2 = new Account(2, 50.0, new Customer("Bob","b@gmail.com"));
-        centralBank.addAccounts(account1);
-        centralBank.addAccounts(account2);
-        assertEquals(2, centralBank.getAccounts().size());
-        assertTrue(centralBank.getAccounts().contains(account1));
-        assertTrue(centralBank.getAccounts().contains(account2));
-    }
-
-    @Test
-    public void testAddAccounts() {
-        centralBank = new CentralBank();
-        account1 = new Account(1, 100.0, new Customer("Alice","a@gmail.com"));
-        account2 = new Account(2, 50.0, new Customer("Bob","b@gmail.com"));
-        centralBank.addAccounts(account1);
-        centralBank.addAccounts(account2);
-        account3 = new Account(3, 75.0, new Customer("Charlie","c@gmail.com"));
-        centralBank.addAccounts(account3);
-        assertTrue(centralBank.getAccounts().contains(account3));
-    }
-
-    @Test
-    public void testDeleteAccount() {
-        centralBank = new CentralBank();
-        account1 = new Account(1, 100.0, new Customer("Alice","a@gmail.com"));
-        account2 = new Account(2, 50.0, new Customer("Bob","b@gmail.com"));
-        centralBank.addAccounts(account1);
-        centralBank.addAccounts(account2);
-        centralBank.deleteAccount(account1);
-        assertFalse(centralBank.getAccounts().contains(account1));
-        assertEquals(1, centralBank.getAccounts().size());
-
-        centralBank.deleteAccount(account2);
-        assertFalse(centralBank.getAccounts().contains(account2));
-        assertEquals(0, centralBank.getAccounts().size());
+    public void testGetOverallBalance() {
+        CentralBank bank = new CentralBank();
+        Customer customer = new Customer("Nardos","naninut@gmail.com");
+        SavingsAccount savingsAccount = new SavingsAccount(1,100,customer,"Simret1023###");
+        CheckingsAccount checkingsAccount = new CheckingsAccount(1,100,customer,"Simret1023###");
+        bank.addSavingAccounts(savingsAccount);
+        bank.addCheckingAccounts(checkingsAccount);
+        assertEquals(200, bank.getOverallBalance(), 0.01);
     }
 }
