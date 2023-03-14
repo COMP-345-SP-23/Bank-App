@@ -1,30 +1,48 @@
 package edu.ithaca.barr.bank;
 import java.util.ArrayList;
-import java.time.Duration;
-import java.time.LocalDateTime;
+
 /* Class name: Account
    Methods: Deposit,Withdraw,Transfer,getAccNum,getCustomer,checkBalance,getTransactionHistory
    Name: Nardos Mamo
    Date: Feb 19, 2023
    */ 
 public class Account {
-    private int acct_num;
-    private double balance;
-    private Customer customer;
+    protected int acct_num;
+    protected double balance;
+    protected Customer customer;
     private ArrayList<Double> transaction_history;
+    private String password; 
+    private boolean freeze;
     private boolean suspicious;
-    private ArrayList<LocalDateTime> transactionTimes = new ArrayList<>();
+    
 
-    public Account(int acct_num,double balance,Customer customer){
+    public Account(int acct_num,double balance,Customer customer, String password){
         this.acct_num = acct_num;
         this.balance = balance;
         this.customer = customer;
+        this.password = password;
         this.transaction_history = new ArrayList<>();
+    }
+    public void setFreeze(boolean freeze)
+    {
+        this.freeze = freeze;
+    }
+
+    public boolean getFreeze(){
+        return freeze;
     }
 
     public int getAcctNum(){
         return acct_num;
     }
+    public void setSuspicious(boolean suspicious)
+    {
+        this.suspicious = suspicious;
+    }
+    public boolean getSuspicious(){
+        return suspicious;
+    }
+
     public Customer getCustomer(){
         return customer;
     }
@@ -32,7 +50,7 @@ public class Account {
         return balance;
     }
 
-    public static boolean isAmountValid(double amount){
+    public boolean isAmountValid(double amount){
         //String num = Double.toString(amount);
         
         if( amount <0){
@@ -44,7 +62,6 @@ public class Account {
 
     public void deposit(double amount) {
         if(isAmountValid(amount)){
-        transactionTimes.add(LocalDateTime.now());
         balance += amount;
         transaction_history.add(amount);}
         else
@@ -58,26 +75,10 @@ public class Account {
         if(!isAmountValid(amount)){
             throw new IllegalArgumentException("Enter a positive integer with less than or equal to 2 decimal points");
         }
-        transactionTimes.add(LocalDateTime.now());
         balance -= amount;
         transaction_history.add(-amount);
     }
 
-//     public boolean checkSuspicion(){
-
-//         LocalDateTime lastTransactionTime = transactionTimes.get(transactionTimes.size() - 1);
-//         LocalDateTime secondLastTransactionTime = transactionTimes.get(transactionTimes.size() - 2);
-//         LocalDateTime thirdLastTransactionTime = transactionTimes.get(transactionTimes.size() - 3);
-//         Duration duration1 = Duration.between(thirdLastTransactionTime, secondLastTransactionTime);
-//         Duration duration2 = Duration.between(secondLastTransactionTime, lastTransactionTime);
-        
-//    if (duration1.compareTo(Duration.ofHours(1)) <= 0 && duration2.compareTo(Duration.ofHours(1)) <= 0)
-//        suspicious=true;
-//    else
-//        suspicious=false;
-
-//        return suspicious;
-//     }
 
     public ArrayList<Double> getTransactionHistory() {
         return transaction_history;
@@ -92,5 +93,107 @@ public class Account {
         }
         withdraw(amount);
         acc2.deposit(amount);
+
     }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public static boolean isPasswordValid(String password){
+       
+        // for checking if password length
+        // is between 8 and 15
+        if (!((password.length() >= 8)
+              && (password.length() <= 15))) {
+            throw new IllegalArgumentException("Password length should be between 8 to 15 characters");
+        }
+  
+        // to check space
+        if (password.contains(" ")) {
+            throw new IllegalArgumentException("Password cant have space");
+        }
+        if (true) {
+            int count = 0;
+  
+            // check digits from 0 to 9
+            for (int i = 0; i <= 9; i++) {
+  
+                // to convert int to string
+                String str1 = Integer.toString(i);
+  
+                if (password.contains(str1)) {
+                    count = 1;
+                }
+            }
+            if (count == 0) {
+                throw new IllegalArgumentException("Password should contain at least one digit(0-9)");
+            }
+        }
+  
+        // for special characters
+        if (!(password.contains("@") || password.contains("#")
+              || password.contains("!") || password.contains("~")
+              || password.contains("$") || password.contains("%")
+              || password.contains("^") || password.contains("&")
+              || password.contains("*") || password.contains("(")
+              || password.contains(")") || password.contains("-")
+              || password.contains("+") || password.contains("/")
+              || password.contains(":") || password.contains(".")
+              || password.contains(", ") || password.contains("<")
+              || password.contains(">") || password.contains("?")
+              || password.contains("|"))) {
+            throw new IllegalArgumentException("Password should contain at least one special character");
+        }
+  
+        if (true) {
+            int count = 0;
+  
+            // checking capital letters
+            for (int i = 65; i <= 90; i++) {
+  
+                // type casting
+                char c = (char)i;
+  
+                String str1 = Character.toString(c);
+                if (password.contains(str1)) {
+                    count = 1;
+                }
+            }
+            if (count == 0) {
+                throw new IllegalArgumentException("Password should contain at"
+                + " least one uppercase letter(A-Z)");
+            }
+        }
+  
+        if (true) {
+            int count = 0;
+  
+            // checking small letters
+            for (int i = 90; i <= 122; i++) {
+  
+                // type casting
+                char c = (char)i;
+                String str1 = Character.toString(c);
+  
+                if (password.contains(str1)) {
+                    count = 1;
+                }
+            }
+            if (count == 0) {
+                throw new IllegalArgumentException("Password should contain at least one lowercase letter(a-z)");
+            }
+        }
+  
+        // The password is valid
+    
+        return true;
+
+
+    }
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
+
 }
