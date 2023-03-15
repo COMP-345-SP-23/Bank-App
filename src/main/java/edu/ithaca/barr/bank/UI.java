@@ -46,22 +46,8 @@ public class UI {
 
                 switch(atmORteller){
                     //Login in thorugh the ATM
-                        case 1:
-                        System.out.println("Enter account number");
-                        int acc_num=scnr.nextInt();
-                        System.out.println("Enter password");
-                        String password=scnr.next();
-                    
-                        boolean isAuthenticated = atm.authenticateUser(acc_num, password);
-
-                        while (!isAuthenticated) { // Restart loop if password doesn't match
-                            System.out.println("Incorrect password. Please try again.");
-                            System.out.println("Enter password");
-                            password = scnr.next();
-                            isAuthenticated = atm.authenticateUser(acc_num, password);
-                        }
-                           
-                            System.out.println("Choose Account Type:");
+                        case 1:  
+                          System.out.println("Choose Account Type:");
                             System.out.println("1, Checking");
                             System.out.println("2, Saving");
                            
@@ -73,6 +59,23 @@ public class UI {
                         //Login into checking account through the ATM
                         switch (choice){
                             case 1:
+                            System.out.println("Enter account number");
+                            int acc_num=scnr.nextInt();
+                            System.out.println("Enter password");
+                            String password=scnr.next();
+                        
+                            boolean isAuthenticated = atm.authenticateUser(acc_num, password);
+    
+                            while (!isAuthenticated) { // Restart loop if password doesn't match
+                                System.out.println("Incorrect password/account number. Please try again.");
+                                System.out.println("Enter account number");
+                                acc_num=scnr.nextInt();
+
+                                System.out.println("Enter password");
+                                password = scnr.next();
+                                isAuthenticated = atm.authenticateUser(acc_num, password);
+                            }
+
                             System.out.println("Please choose:");
                             System.out.println("1.Withdraw");   
                             System.out.println("2.Transfer");   
@@ -136,7 +139,7 @@ public class UI {
                         case 6:
 
                         System.out.println("Thank you!");
-
+                          break;
                         default:
 
                         System.out.println("Please choose the correct option");
@@ -147,6 +150,23 @@ public class UI {
                           break;
                           //Login to the saving account through ATM
                           case 2:
+
+                          System.out.println("Enter account number");
+                          acc_num=scnr.nextInt();
+                          System.out.println("Enter password");
+                          password=scnr.next();
+                      
+                        isAuthenticated = atm.authenticateUser(acc_num, password);
+  
+                          while (!isAuthenticated) { // Restart loop if password doesn't match
+                              System.out.println("Incorrect password/account number. Please try again.");
+                              System.out.println("Enter account number");
+                          acc_num=scnr.nextInt();
+                              System.out.println("Enter password");
+                              password = scnr.next();
+                              isAuthenticated = atm.authenticateUser(acc_num, password);
+                          }
+
                           System.out.println("Please choose:");
                             System.out.println("1.Withdraw");        
                            System.out.println("2.Deposit");                  
@@ -154,6 +174,7 @@ public class UI {
                             System.out.println("4.Transaction History"); 
                             System.out.println("5.Transfer to checking"); 
                             System.out.println("6. Exit");
+
                          type=scnr.nextInt();
                          switch(type){
                             // Withdraw from the saving account through ATM
@@ -230,9 +251,9 @@ public class UI {
                        //Login through the Bank Teller
                         case 2:
                         System.out.println("Enter account number");
-                        acc_num=scnr.nextInt();
+                          int acc_num = scnr.nextInt();
                         System.out.println("Enter password");
-                        password=scnr.next();
+                        String password=scnr.next();
                         teller.authenticateUser(acc_num,password);
 
                         if (teller.authenticateUser(acc_num, password)==false){
@@ -455,9 +476,8 @@ public class UI {
                  try{
                      teller.createCheckingAccount(Checkingcustomer, password);
                  
-                     System.out.println("Your Account number is: "+bank.getCheckingAccounts().get (bank.getCheckingAccounts().size()-1).getAcctNum());
-
-                     System.out.println("Checking account successfully created!");
+                     int newAccountNumber = bank.getCheckingAccounts().size(); // get the index of the newly added account
+                    System.out.println("Savings account created with account number: " + newAccountNumber);
                  }
                  catch(IllegalArgumentException e){
                 System.out.println("Password should not contain any space.");
@@ -486,12 +506,26 @@ public class UI {
                   password = scnr.next();
                     
                      Customer Savingcustomer = new Customer(name,email);
-                 
+                     try{
                      teller.createSavingAccount(Savingcustomer, password);
-                     System.out.println("Your Account number is: "+bank.getSavingAccounts().get (bank.getSavingAccounts().size()-1).getAcctNum());
 
-                     System.out.println("Saving account successfully created!");
-                    
+                    int newAccountNumber = bank.getSavingAccounts().size(); // get the index of the newly added account
+                    System.out.println("Savings account created with account number: " + newAccountNumber);
+                     }
+                     catch(IllegalArgumentException e){
+                        System.out.println("Password should not contain any space.");
+         
+                        System.out.println("Password should contain at least one digit(0-9).");
+         
+                        System.out.println("Password length should be between 8 to 15 characters."); 
+         
+                        System.out.println("Password should contain at least one lowercase letter(a-z).");
+         
+                        System.out.println("Password should contain at least one uppercase letter(A-Z). ");
+         
+                        System.out.println("Password should contain at least one special character ( @, #, %, &, !, $, etc…).");
+                         }
+        
 
                break;
                 }
