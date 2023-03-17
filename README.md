@@ -9,7 +9,7 @@ Link to UML Use Case Diagram:
 << https://drive.google.com/file/d/11aHQGEY17bDOg7T0jDhaxKtAm4KifwEo/view?usp=sharing >>
 
 Link to UML Class Diagram:
-<< https://drive.google.com/file/d/11sYPYLoKmkL2ip_rXbhXB5xNDMdY_6od/view?usp=share_link>>
+<< https://drive.google.com/file/d/1fWRYX_ax9gVxKZg9EaLZayDz_JXwuUxA/view?usp=sharing>>
 
 Three Use Cases that you will implement first:
 1. - ATM
@@ -18,11 +18,16 @@ Three Use Cases that you will implement first:
 
 Which classes & methods do you need to implement for these use cases?
 (Indicated which team member is responsible for the implemenation)
-1. - Account(Methods- Deposit,Withdraw,Transfer,getAccNum,getCustomer,checkBalance,getTransactionHistory)
-2. -ATM_teller Interface(Methods-Deposit,Withdraw,Transfer,checkBalance,getTransactionHistory)
-3. -Teller(Method- Deposit,Withdraw,Transfer,checkBalance,getTransactionHistory,deleteAccount, CreateAccount)
-4. -ATM(Methods-Deposit,Withdraw,Transfer,checkBalance,getTransactionHistory)
-5.- Customer(Methods- getName, getEmail)
+1. -Account(Methods- Deposit,Withdraw,Transfer,getAccNum,getCustomer,checkBalance,getTransactionHistory,getPassword,checkPassword)(Nardos and Vanessa)
+2. -SavingsAccount- implements from Account class and have additional methods (maxWithdrawal,interestEarned)(Nardos and Vanessa)
+3. -CheckingsAccount - implements from Account class(Nardos and Vanessa)
+4. -ATM_teller Interface(Methods-checkSavingsBalance,checkCheckingBalance,depositToSavings,depositToCheckings,seeSavingsTransaction,seeCheckingsTransaction,withdrawFromSavings,withdrawFromCheckings,trtransferChecking,transferSavingtoChecking,authenticateUser)(Simret)
+5.-Teller - in addition to the methods in the interface the teller has createSavingAccount,createCheckingAccount,deleteSavingAccount,deleteCheckingAccount methods(Nardos)
+6 -ATM - has all the methods in the ATM_teller interface(Simret)
+7.- Customer(Methods- getName, getEmail)(Simret)
+8.- CentralBank(Methods- searchSavingAccount,searchCheckingAccount,getSavingAccouts,getCheckingAccounts,addSavingAccounts,addCheckingAccounts,getOverallBalance)(Simret)
+9.- Administrator(Methods- getOverallBalance,freezeCheckingAccount,freezeSavingAccount,unfreezeCheckingAccount,unfreezeSavingAccount,getSuspiciousSavings,getSuspiciousCheckings)(Simret and Vanessa)
+10.-User Interface-(Nardos)
 
 Don't forget to use Test-Driven Development (TDD)
 1. Write Class and Method Function Headers
