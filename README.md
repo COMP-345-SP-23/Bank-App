@@ -5,6 +5,9 @@
 Names:
 << Nardos , Simret and Vanessa >>
 
+Link to Requirements Document 
+<<https://docs.google.com/document/d/1-pKehThNOm8TJwOM18VeIuC9TttF-Pmkahn2sR0sOQE/edit?usp=sharing>>
+
 Link to UML Use Case Diagram:
 << https://drive.google.com/file/d/11aHQGEY17bDOg7T0jDhaxKtAm4KifwEo/view?usp=sharing >>
 
