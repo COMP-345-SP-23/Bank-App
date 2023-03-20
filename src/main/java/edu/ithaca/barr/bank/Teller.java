@@ -131,8 +131,16 @@ public class Teller implements ATM_teller {
                 return true;
             }
         }
+        for (Account account : bank.getSavingAccounts()) {
+            if (accountNumber == account.getAcctNum() && account.checkPassword(password)) {
+                current_account = account;
+                return true;
+            }
+        }
         return false;
     }
+
+   
 
 @Override
     public void transferSavingtoChecking(SavingsAccount accountSender, CheckingsAccount accountReciever,
@@ -146,7 +154,7 @@ public class Teller implements ATM_teller {
             throw new IllegalArgumentException("You can not transfer money from your savings account unless it is to your checkings Account");
                 
     }
-    
 
-    
+
+
 }

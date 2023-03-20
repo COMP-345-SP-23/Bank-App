@@ -9,35 +9,15 @@ import java.util.ArrayList;
  * Date: 23 Feb 2023
  */
 
-public class SavingsAccount extends Account{
+ public class SavingsAccount extends Account{
+    int maxAmount = 1000;
+    double interestRate = 0.35;
     public SavingsAccount(int acct_num, double balance, Customer customer, String password) {
         super(acct_num, balance, customer, password);
      
     }
-
-    public  boolean isAmountValid(double amount){
-        return super.isAmountValid(amount);
-    }
-
-    public void deposit(double amount){
-        super.deposit(amount);
-    }
-
-    public void withdraw(double amount){
-        super.withdraw(amount);
-    }
-
-    public ArrayList<Double> getTransactionHistory(){
-        return super.getTransactionHistory();
-        
-    }
-
-    public void transfer(Account acc2, double amount){
-        super.transfer(acc2, amount);
-    }
-
-    public void maxWithdrawal(double amount, double maxAmount){
-        if( amount < maxAmount){
+    public void maxWithdrawal(double amount){
+        if( amount <= maxAmount){
             withdraw(amount);
         }
 
@@ -47,51 +27,11 @@ public class SavingsAccount extends Account{
     }
 
 
-    public double interestEarned( SavingsAccount account, double interestRate){
+    public double interestEarned( SavingsAccount account){
         double balanceAfterInterest = 0.0;
         if (account != null && account.checkBalance() != 0.0){          
             balanceAfterInterest = account.checkBalance() + account.checkBalance() * interestRate;    
         }
         return balanceAfterInterest;
-      
-    }
-
-
-    public int getAcctNum(){
-        return acct_num;
-    }
-
-
-    public Customer getCustomer(){
-        return customer;
-
-    }
-
-
-    public double checkBalance() {
-        return balance;
-    }
-
-    public int getTransactionCount() {
-        return getTransactionCount();
-    }
-
-    public void checkSuspiciousNess(int acc_num) {
-        
-    }
-
-    public void freezeAccount(){
-        freezeAccount();
-    }
-
-    public void unfreezeAccount(){
-       unfreezeAccount();
-
-    }
-
-    public boolean isFrozen() {
-        return isFrozen();
-    }
     
-
-}
+}}
