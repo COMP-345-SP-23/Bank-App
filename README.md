@@ -14,6 +14,12 @@ Link to UML Use Case Diagram:
 Link to UML Class Diagram:
 << https://drive.google.com/file/d/1fWRYX_ax9gVxKZg9EaLZayDz_JXwuUxA/view?usp=sharing>>
 
+Link to UML Sequence Diagram:
+<<https://drive.google.com/file/d/1XX2A5za30BVD2Bkkb4Lswd9_QAtnfRdZ/view?usp=sharing>>
+
+Link to UML State Diagram:
+<<https://drive.google.com/file/d/1YNfy2vFmPVUqkZpixCByOH0HazGp08v3/view?usp=sharing>>
+
 Three Use Cases that you will implement first:
 1. - ATM
 2. - Teller
