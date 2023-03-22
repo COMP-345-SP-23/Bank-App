@@ -10,7 +10,7 @@ public class Account {
     protected int acct_num;
     protected double balance;
     protected Customer customer;
-    private ArrayList<Double> transaction_history;
+    protected ArrayList<Double> transaction_history;
     private String password; 
     private boolean freeze;
     private boolean suspicious;
