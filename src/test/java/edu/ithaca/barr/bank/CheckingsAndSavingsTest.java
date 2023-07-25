@@ -20,7 +20,7 @@ public class CheckingsAndSavingsTest {
      */
     void testDeposit() {
         Customer customer = new Customer("John", "johndoe@example.com");
-        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
+        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer,"Password123#");
         account.deposit(500.0);
         assertEquals(1500.0, account.checkBalance(), 0.01);
         assertEquals(1, account.getTransactionHistory().size());
@@ -33,7 +33,7 @@ public class CheckingsAndSavingsTest {
     @Test
     void testWithdraw() {
         Customer customer = new Customer("John", "johndoe@example.com");
-        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
+        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer,"Password123#");
         account.withdraw(500.0);
         assertEquals(500.0, account.checkBalance(), 0.01);
         assertEquals(1, account.getTransactionHistory().size());
@@ -46,8 +46,8 @@ public class CheckingsAndSavingsTest {
     @Test
     void testTransfer() {
         Customer customer = new Customer("John", "johndoe@example.com");
-        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer);
-        CheckingsAccount account2 = new CheckingsAccount(654321, 500.0, customer);
+        CheckingsAccount account = new CheckingsAccount(123456, 1000.0, customer,"Password123#");
+        CheckingsAccount account2 = new CheckingsAccount(654321, 500.0, customer,"Password123#");
         account.transfer(account2, 500.0);
         assertEquals(500.0, account.checkBalance(), 0.01);
         assertEquals(1, account.getTransactionHistory().size());
@@ -63,7 +63,7 @@ public class CheckingsAndSavingsTest {
     @Test
     void depositAndInterestTest(){
         Customer customer = new Customer("John", "johndoe@example.com");
-        SavingsAccount account = new SavingsAccount(123456, 1000.0, customer);
+        SavingsAccount account = new SavingsAccount(123456, 1000.0, customer,"Password123#");
         account.deposit(500.0);
         assertEquals(1500.0, account.checkBalance());
         account.interestEarned(account, 0.05);
@@ -77,7 +77,7 @@ public class CheckingsAndSavingsTest {
     @Test
     void maxWithdrawalTest(){
         Customer customer = new Customer("John", "johndoe@example.com");
-        SavingsAccount account = new SavingsAccount(123456, 10000.0, customer);
+        SavingsAccount account = new SavingsAccount(123456, 10000.0, customer,"Password123#");
         assertThrows(IllegalArgumentException.class, ()-> account.maxWithdrawal(5500.00, 5000.0));
 
     }

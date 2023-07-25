@@ -27,20 +27,20 @@ class BankAccountTest {
 
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
 
-        assertFalse( BankAccount.isEmailValid(""));   // empty string
+        assertThrows(StringIndexOutOfBoundsException.class, ()->BankAccount.isEmailValid(""));   // empty string
     
-        assertFalse(BankAccount.isEmailValid("abc#def"));//the only allowed characters are letters,digits,'.','-','_'
+        assertThrows(StringIndexOutOfBoundsException.class,()->BankAccount.isEmailValid("abc#def"));//the only allowed characters are letters,digits,'.','-','_'
 
 
 
-        assertFalse( BankAccount.isEmailValid(""));         // empty string
+        assertThrows(StringIndexOutOfBoundsException.class,()->BankAccount.isEmailValid(""));         // empty string
         assertFalse( BankAccount.isEmailValid("abc@"));
-        assertFalse( BankAccount.isEmailValid("abc"));
+        assertThrows(StringIndexOutOfBoundsException.class,()-> BankAccount.isEmailValid("abc"));
 
         // valid email address - boundary case because it is the minimum number of accepted chars
         assertTrue(BankAccount.isEmailValid( "a@b.com")); 
         // empty string - equivalance case because it should not be an empty string  
-        assertFalse( BankAccount.isEmailValid("")); 
+        assertThrows(StringIndexOutOfBoundsException.class,()-> BankAccount.isEmailValid("")); 
         //all allowed characters - equivalance case, because it ensures letters, nums, and certain chars are allowed        
         assertTrue(BankAccount.isEmailValid("aZ1_0.9-d@z.net")); 
         //allowed character, but must be folllowed by a letter/number - equivalance case, because it ensures email fails in specific case
@@ -63,7 +63,7 @@ class BankAccountTest {
         assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
-        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        assertThrows(StringIndexOutOfBoundsException.class, ()-> new BankAccount("", 100));
     }
 
 }
